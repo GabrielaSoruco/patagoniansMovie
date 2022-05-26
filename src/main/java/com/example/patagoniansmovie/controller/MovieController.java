@@ -1,8 +1,7 @@
 package com.example.patagoniansmovie.controller;
 
 import com.example.patagoniansmovie.dto.MovieDTO;
-import com.example.patagoniansmovie.model.Movie;
-import com.example.patagoniansmovie.service.MovieService;
+import com.example.patagoniansmovie.service.IMovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +13,10 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieController {
     @Autowired
-    private MovieService service;
+    private IMovieService service;
 
     @GetMapping
-    public ResponseEntity<List<Movie>> findAllMovies(){
+    public ResponseEntity<List<MovieDTO>> findAllMovies(){
         return new ResponseEntity<>(service.getMovies(), HttpStatus.OK);
     }
 
@@ -45,5 +44,15 @@ public class MovieController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>("NO SE ENCONTRÓ REGISTRO CON ID: " + id, HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> getMovieByTitle(@RequestParam String title){
+        return new ResponseEntity<>(service.getMovieByTitle(title), HttpStatus.OK);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> getMovieByDirector(@RequestParam String director){
+        return new ResponseEntity<>(service.getMovieByTitle(director), HttpStatus.OK);
     }
 }
