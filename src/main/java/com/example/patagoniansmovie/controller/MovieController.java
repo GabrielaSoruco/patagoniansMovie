@@ -53,6 +53,6 @@ public class MovieController {
 
     @GetMapping("/search")
     public ResponseEntity<?> getMovieByDirector(@RequestParam String director){
-        return new ResponseEntity<>(service.getMovieByTitle(director), HttpStatus.OK);
+        return new ResponseEntity<>(service.getMovieByDirector(director), HttpStatus.OK);
     }
 }

@@ -86,7 +86,7 @@ public class MovieServiceImpl implements IMovieService {
 
     @Override
     public Movie getMovieByDirector(String director){
-        Optional<Movie> movie = repository.findMovieByTitle(director);
+        Optional<Movie> movie = repository.findMovieByDirector(director);
         log.info("Buscando pelicula...");
         return movie.orElseThrow(()-> new IllegalArgumentException("Película no encontrada"));
     }
